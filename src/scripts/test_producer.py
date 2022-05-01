@@ -8,4 +8,5 @@ if __name__ == '__main__':
     try:
         stream.start()
     except KeyboardInterrupt:
+        print("ByeBye")
         stream.disconnect()
