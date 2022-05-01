@@ -1,4 +1,4 @@
-from LoggerConfig import config_logger
+from .LoggerConfig import config_logger
 
 
 __all__ = (
