@@ -28,6 +28,7 @@ class TweetProducer(StreamingClient):
 
     def on_data(self, data):
         logger.info("Data received")
+        print("data received")
         self.send(data)
 
     def on_error(self, status):
