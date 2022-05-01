@@ -19,7 +19,7 @@ async def hello(messages):
         if data is not None:
             print(data)
             log.debug(data)
-            id = data.id
+            id = data['data']['id']
             filename = f"{id}.json"
             datalake.put_json(data, filename, 'raw', 'twitter')
         else:
