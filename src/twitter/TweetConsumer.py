@@ -1,7 +1,5 @@
 import faust
 import logging
-from asyncio import sleep
-from datetime import datetime
 from src.utils.datalake import LocalDatalakeClient, LocalDatalakeConfig
 
 log = logging.getLogger(__name__)
@@ -11,18 +9,17 @@ log = logging.getLogger(__name__)
 # faust -A src.twitter.TweetConsumer worker -l info
 
 app = faust.App('src.twitter.TweetConsumer', broker='kafka://localhost:9092')
-election_raw = app.topic('twitter.election.raw', value_type=bytes)
+election_raw = app.topic('twitter.election.raw', value_serializer='json')
 
 datalake = LocalDatalakeClient(LocalDatalakeConfig())
 
 @app.agent(election_raw)
 async def hello(messages):
-    async for message in messages:
-        if message is not None:
-            data = dict(message)
+    async for data in messages:
+        if data is not None:
             id = data.data.id
             filename = f"{id}.json"
-            datalake.put_json(dict(message), filename, 'raw', 'twitter')
+            datalake.put_json(data, filename, 'raw', 'twitter')
         else:
             log.info('No message received')
 
