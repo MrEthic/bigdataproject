@@ -21,7 +21,7 @@ async def hello(messages):
             data = dict(message)
             id = data.data.id
             filename = f"{id}.json"
-            datalake.put_json(dict(message), id, 'raw', 'twitter')
+            datalake.put_json(dict(message), filename, 'raw', 'twitter')
         else:
             log.info('No message received')
 
