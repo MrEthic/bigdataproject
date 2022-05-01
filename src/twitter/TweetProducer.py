@@ -1,8 +1,11 @@
 from tweepy import StreamingClient, StreamRule
 from kafka import KafkaConsumer, KafkaProducer
 import base64
-from . import logger
+import logging
+from src.utils.logger import config_logger
 
+
+logger = config_logger(logging.getLogger(__name__))
 
 class TweetProducer(StreamingClient):
 
