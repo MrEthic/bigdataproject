@@ -11,8 +11,8 @@ class TweetProducer(StreamingClient):
         tag="legislatives2022 no retweets"
     )
 
-    def __init__(self, bootstrap_server: str = 'localhost:9092', topic_name: str = 'TwitterElectionRaw'):
-        super().__init__()
+    def __init__(self, bootstrap_server: str = 'localhost:9092', topic_name: str = 'twitter.election.raw', *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.kafka_producer = KafkaProducer(bootstrap_servers=bootstrap_server)
         self.topic_name = topic_name
 
@@ -34,5 +34,3 @@ class TweetProducer(StreamingClient):
         self.filter(expansions="author_id",
               tweet_fields="attachments,author_id,created_at,entities,geo,lang,possibly_sensitive,referenced_tweets,source",
               user_fields="created_at,profile_image_url,description,entities,verified,url")
-
-stream = StdOutListener(TWITTER_BEARER_TOKEN, wait_on_rate_limit=True)
