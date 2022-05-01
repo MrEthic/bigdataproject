@@ -28,5 +28,5 @@ class BaseDatalakeConfig(ABC):
 class LocalDatalakeConfig(BaseDatalakeConfig):
     Layer = ['raw', 'formatted', 'usage']
     DateFormat = "%Y%m%d"
-    DataLakeRoot = os.sep + os.sep.join(['root', 'BIGDATAPROJECT', 'datalake'])
+    DataLakeRoot = os.sep + os.sep.join(['home', 'bigdata', 'datalake'])
     OSSep = os.sep
