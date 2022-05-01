@@ -8,8 +8,9 @@ log = logging.getLogger(__name__)
 
 
 # python -m src.twitter.TweetConsumer
+# faust -A src.twitter.TweetConsumer worker -l info
 
-app = faust.App('twitterElection', broker='kafka://localhost:9092')
+app = faust.App('src.twitter.TweetConsumer', broker='kafka://localhost:9092')
 election_raw = app.topic('twitter.election.raw', value_type=bytes)
 
 datalake = LocalDatalakeClient(LocalDatalakeConfig())
