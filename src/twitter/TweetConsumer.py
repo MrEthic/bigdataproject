@@ -17,6 +17,8 @@ datalake = LocalDatalakeClient(LocalDatalakeConfig())
 async def hello(messages):
     async for data in messages:
         if data is not None:
+            print(data)
+            log.debug(data)
             id = data.id
             filename = f"{id}.json"
             datalake.put_json(data, filename, 'raw', 'twitter')
