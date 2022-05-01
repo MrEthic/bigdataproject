@@ -27,12 +27,17 @@ class TweetProducer(StreamingClient):
             logger.exception(f"Error while sending data to topic {self.topic_name}\n\t{b64_data}")
 
     def on_data(self, data):
+        logger.info("Data received")
         self.send(data)
 
     def on_error(self, status):
         logger.error(f"Error receiving data from Twitter Stream, status: {status}")
 
+    def on_disconnect(self):
+        logger.info("TweetProducer disconnected")
+
     def start(self):
+        logger.info("TweetProducer started")
         self.add_rules(TweetProducer.RULE)
         self.filter(expansions="author_id",
               tweet_fields="attachments,author_id,created_at,entities,geo,lang,possibly_sensitive,referenced_tweets,source",

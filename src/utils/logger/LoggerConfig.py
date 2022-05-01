@@ -19,7 +19,7 @@ logger_file_handler_error.setLevel(logging.ERROR)
 logger_file_handler_error.setFormatter(formatter)
 
 logger_console_handler = logging.StreamHandler()
-logger_console_handler.setLevel(logging.WARNING)
+logger_console_handler.setLevel(logging.DEBUG)
 logger_console_handler.setFormatter(formatter)
 
 def config_logger(logger: logging.Logger):
