@@ -5,7 +5,12 @@ import logging
 from src.utils.logger import config_logger
 
 
-logger = config_logger(logging.getLogger(__name__))
+logger = logging.getLogger(__name__)
+
+l = logging.getLogger("tweepy")
+l.setLevel(logging.DEBUG)
+handler = logging.FileHandler(filename="/home/bigdata/logs/bigdataproject/tweepy.log")
+l.addHandler(handler)
 
 class TweetProducer(StreamingClient):
 
@@ -33,6 +38,9 @@ class TweetProducer(StreamingClient):
 
     def on_error(self, status):
         logger.error(f"Error receiving data from Twitter Stream, status: {status}")
+
+    def on_connection_error(self):
+        self.disconnect()
 
     def on_disconnect(self):
         logger.info("TweetProducer disconnected")
