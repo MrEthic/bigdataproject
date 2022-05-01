@@ -1,5 +1,5 @@
 from tweepy import StreamingClient, StreamRule
-from kafka import KafkaConsumer, KafkaProducer, KafkaTimeoutError
+from kafka import KafkaConsumer, KafkaProducer
 import base64
 from . import logger
 
@@ -19,7 +19,7 @@ class TweetProducer(StreamingClient):
     def send(self, data):
         try:
             self.kafka_producer.send(self.topic_name, data.decode('utf-8').encode('utf-8')).get(timeout=10)
-        except KafkaTimeoutError as e:
+        except Exception:
             b64_data = base64.b64encode(str(data))
             logger.exception(f"Error while sending data to topic {self.topic_name}\n\t{b64_data}")
 
