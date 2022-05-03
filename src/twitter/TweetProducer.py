@@ -11,8 +11,8 @@ logger = config_logger(logging.getLogger(__name__))
 class TweetProducer(StreamingClient):
 
     RULE = StreamRule(
-        value="-is:retweet legislatives2022",
-        tag="legislatives2022 no retweets"
+        value="-is:retweet -is:reply legislatives2022",
+        tag="legislatives2022 no retweets no reply"
     )
 
     def __init__(self, bootstrap_server: str = 'localhost:9092', topic_name: str = 'twitter.election.raw', *args, **kwargs):
