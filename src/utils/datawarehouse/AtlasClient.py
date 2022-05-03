@@ -28,7 +28,7 @@ class AtlasClient(BaseWarehouseClient):
 
     def insert_tweets(self, tweets: list):
         tweets_clean = [self._validate_tweet_data(t) for t in tweets]
-        self.tweets.update_m
+        #self.tweets.update_m
 
 
     def insert_user(self, user: dict): pass
