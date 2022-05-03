@@ -1,10 +1,10 @@
 import pymongo
 from pymongo import MongoClient
 from src import Config
-from src.utils.datawarehouse import BaseWarehouseClient as Base
+from src.utils.datawarehouse import BaseWarehouseClient
 
 
-class AtlasClient(Base):
+class AtlasClient(BaseWarehouseClient):
 
     def __init__(self, conn_str: str, db_name: str):
         self.client = MongoClient(conn_str)

@@ -1,5 +1,5 @@
-from .AtlasClient import AtlasClient
 from .BaseWarehouseClient import BaseWarehouseClient
+from .AtlasClient import AtlasClient
 
 
 __all__ = (
