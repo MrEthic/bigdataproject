@@ -1,8 +1,9 @@
 import faust
 import logging
 from src.utils.datalake import LocalDatalakeClient, LocalDatalakeConfig
+from src.utils.logger import config_logger
 
-log = logging.getLogger(__name__)
+log = config_logger(logging.getLogger(__name__))
 
 
 # python -m src.twitter.TweetConsumer
@@ -18,10 +19,10 @@ async def hello(messages):
     async for data in messages:
         if data is not None:
             print(data)
-            log.debug(data)
             id = data['data']['id']
             filename = f"{id}.json"
             datalake.put_json(data, filename, 'raw', 'twitter')
+            log.info(f'Tweet {id} consumed')
         else:
             log.info('No message received')
 

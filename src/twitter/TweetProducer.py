@@ -5,12 +5,8 @@ import logging
 from src.utils.logger import config_logger
 
 
-logger = logging.getLogger(__name__)
+logger = config_logger(logging.getLogger(__name__))
 
-l = logging.getLogger("tweepy")
-l.setLevel(logging.DEBUG)
-handler = logging.FileHandler(filename="/home/bigdata/logs/bigdataproject/tweepy.log")
-l.addHandler(handler)
 
 class TweetProducer(StreamingClient):
 
@@ -32,8 +28,7 @@ class TweetProducer(StreamingClient):
             logger.exception(f"Error while sending data to topic {self.topic_name}\n\t{b64_data}")
 
     def on_data(self, data):
-        logger.info("Data received")
-        print("data received")
+        logger.debug("Tweet received")
         self.send(data)
 
     def on_error(self, status):

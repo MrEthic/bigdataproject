@@ -5,6 +5,7 @@ from pathlib import Path
 import logging
 import re
 import json
+import os, os.path
 from src.utils.datalake import LocalDatalakeConfig, BaseDatalakeClient
 
 
@@ -57,3 +58,51 @@ class LocalDatalakeClient(BaseDatalakeClient):
 
         with open(file_path, 'w') as f:
             json.dump(object_, f, ensure_ascii=False)
+
+    def get_filename(self, layer: str, group: str, datedir: Union[str, date], tid: str, extension: str = 'json') -> str:
+        assert layer in self.layers, f"Layer must be one of the following {self.layers}"
+
+        if type(datedir) == str:
+            datedir = self._validate_date(datedir)
+
+        date_ = datedir.strftime(self.date_format)
+        filename = self.sep.join([
+            self.root,
+            layer,
+            group,
+            date_,
+            tid + extension
+        ])
+        return filename
+
+    def list_day(self, layer: str, group: str, datedir: Union[str, date], extension: str = 'json') -> list:
+        assert layer in self.layers, f"Layer must be one of the following {self.layers}"
+
+        if type(datedir) == str:
+            datedir = self._validate_date(datedir)
+
+        date_ = datedir.strftime(self.date_format)
+
+        dir_ = self.sep.join([
+            self.root,
+            layer,
+            group,
+            date_
+        ])
+        files = [
+            f for f in os.listdir(dir_)
+            if os.path.isfile(self.sep.join([dir_, f]))
+            and f.endswith(extension)
+        ]
+        return files
+
+    def get_json_as_dict(self, layer: str, group: str, datedir: Union[str, date], tid: str) -> Union[None, dict]:
+        filename = self.get_filename(layer, group, datedir, tid)
+        if not os.path.isfile(filename):
+            return None
+
+        with open(filename, 'r') as f:
+            data = json.load(f)
+
+        return data
+
