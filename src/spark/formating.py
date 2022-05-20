@@ -24,7 +24,7 @@ users = tweets_raw.select(col('includes.users'))\
     .drop(col('entities'))
 
 
-print(users.show())
+users.show()
 
 users.write\
     .format("mongodb")\
