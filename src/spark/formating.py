@@ -37,11 +37,13 @@ def main():
 
 if __name__ == '__main__':
     t1 = datetime.datetime.now()
-    print('started at :', t1)
+    print('Started at :', t1)
     main()
     t2 = datetime.datetime.now()
     dist = t2 - t1
-    print('finished at:', t2, ' | elapsed time (s):', dist.seconds)
+    print(f'Finished at: {t2} | elapsed time {dist.seconds}s')
+    #spark.sparkContext._gateway.close()
+    spark.stop()
 
 
 #df = spark.read.format("mongodb").load()
