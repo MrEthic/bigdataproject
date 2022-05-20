@@ -2,10 +2,9 @@ from pyspark import SparkConf, SparkContext
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, explode
 import datetime
+import sys
 
-# Create SparkSession
-# master('local[1]').\
-#    config('spark.jars.packages','org.mongodb.spark:mongo-spark-connector:10.0.0').\
+
 spark = SparkSession(SparkContext(conf=SparkConf()).getOrCreate())
 
 def datalake_to_mongo():
@@ -44,6 +43,7 @@ if __name__ == '__main__':
     print(f'Finished at: {t2} | elapsed time {dist.seconds}s')
     #spark.sparkContext._gateway.close()
     spark.stop()
+    sys.exit(0)
 
 
 #df = spark.read.format("mongodb").load()
