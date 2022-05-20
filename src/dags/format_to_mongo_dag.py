@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 import pendulum
 from airflow import DAG
 from airflow.models import Variable
+from airflow.contrib.operators.spark_submit_operator import SparkSubmitOperator
 
 local_tz = pendulum.timezone("Europe/Paris")
 default_args = {
@@ -18,6 +19,7 @@ pyspark_app_home = Variable.get("BIGDATA_SPARK_HOME")
 with DAG('format_to_mongo_dag',
          default_args=default_args,
          schedule_interval='0 0 12 * * ?') as dag:
+
     datalake_to_mongo = SparkSubmitOperator(
         task_id='datalake_to_mongo',
         conn_id='spark_standalone_cm',
