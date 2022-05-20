@@ -32,6 +32,7 @@ with DAG('format_to_mongo_dag',
         name='datalake_to_mongo',
         execution_timeout=timedelta(minutes=10),
         conf={
+            "spark.executorEnv.JAVA_HOME": "/usr/lib/jvm/java-11-openjdk-amd64",
             "spark.mongodb.input.uri": "mongodb+srv://remote_worker:remote_worker@bddbd.ptwl0.mongodb.net/bigdataproject",
             "spark.mongodb.output.uri": "mongodb+srv://remote_worker:remote_worker@bddbd.ptwl0.mongodb.net/bigdataproject",
             "spark.mongodb.connection.uri": "mongodb+srv://remote_worker:remote_worker@bddbd.ptwl0.mongodb.net/bigdataproject",
