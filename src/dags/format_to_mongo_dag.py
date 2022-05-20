@@ -18,7 +18,7 @@ pyspark_app_home = Variable.get("BIGDATA_SPARK_HOME")
 
 with DAG('format_to_mongo_dag',
          default_args=default_args,
-         schedule_interval='0 0 12 * * ?') as dag:
+         schedule_interval='0 1 * * *') as dag:
 
     datalake_to_mongo = SparkSubmitOperator(
         task_id='datalake_to_mongo',
