@@ -12,7 +12,7 @@ spark = SparkSession.builder.appName('TEST').\
     config("spark.mongodb.collection", "twitter.tweet").\
     getOrCreate()
 
-# Loead raw
+# Load raw
 tweets_raw = spark.read.json("/home/bigdata/datalake/raw/twitter/20220501/*.json")
 
 # Extract Extract
@@ -26,12 +26,17 @@ users = tweets_raw.select(col('includes.users'))\
 
 print(users.show())
 
-#df3.withColumn("_id", df3.data.id).show()
+users.write\
+    .format("mongodb")\
+    .mode("append")\
+    .option("database","bigdataproject")\
+    .option("collection", "twitter.user")\
+    .save()
 
 
 
 
-df = spark.read.format("mongodb").load()
+#df = spark.read.format("mongodb").load()
 
 
 
