@@ -1,3 +1,4 @@
+from pyspark import SparkConf, SparkContext
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, explode
 import datetime
@@ -5,13 +6,7 @@ import datetime
 # Create SparkSession
 # master('local[1]').\
 #    config('spark.jars.packages','org.mongodb.spark:mongo-spark-connector:10.0.0').\
-spark = SparkSession.builder\
-    .config("spark.mongodb.input.uri", "mongodb+srv://remote_worker:remote_worker@bddbd.ptwl0.mongodb.net/bigdataproject")\
-    .config("spark.mongodb.output.uri", "mongodb+srv://remote_worker:remote_worker@bddbd.ptwl0.mongodb.net/bigdataproject")\
-    .config("spark.mongodb.connection.uri","mongodb+srv://remote_worker:remote_worker@bddbd.ptwl0.mongodb.net/bigdataproject")\
-    .config("spark.mongodb.database", "bigdataproject")\
-    .config("spark.mongodb.collection", "twitter.tweet")\
-    .getOrCreate()
+spark = SparkSession(SparkContext(conf=SparkConf()).getOrCreate())
 
 def datalake_to_mongo():
     # Load raw
