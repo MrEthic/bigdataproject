@@ -23,7 +23,7 @@ pyspark_app_home = Variable.get("BIGDATA_SPARK_HOME")
 
 datalake_to_mongo = SparkSubmitOperator(task_id='datalake_to_mongo',
                                               conn_id='spark_standalone_cm',
-                                              application=f'{pyspark_app_home}/spark/formating.py',
+                                              application=f'{pyspark_app_home}/formating.py',
                                               total_executor_cores=4,
                                               packages="org.mongodb.spark:mongo-spark-connector:10.0.0",
                                               executor_cores=2,
