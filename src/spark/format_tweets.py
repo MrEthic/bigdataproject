@@ -40,6 +40,7 @@ def main():
             i = f'0{i}'
         date = f'202205{i}'
         print(f"Handling {date}")
+        return
         datalake_to_mongo(date)
     return
 
