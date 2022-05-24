@@ -1,6 +1,6 @@
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, explode
+from pyspark.sql.functions import col, explode, to_date
 import datetime
 import sys
 
@@ -15,10 +15,12 @@ def datalake_to_mongo():
     # Extract Extract
     users = tweets_raw.select(col('includes.users'))\
         .select(explode("users"))\
-        .select(col('col.*'))\
+        .select(col('col.*')) \
+        .withColumn("created_at_date",to_date('created_at'))\
         .withColumnRenamed("id","_id")\
         .dropDuplicates(["_id"])\
-        .drop(col('entities'))
+        .drop(col('entities'))\
+        .drop(col('created_at'))
 
     users.write\
         .format("mongodb")\
