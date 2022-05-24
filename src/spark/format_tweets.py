@@ -8,9 +8,9 @@ import sys
 
 spark = SparkSession(SparkContext(conf=SparkConf()).getOrCreate())
 
-def datalake_to_mongo():
+def datalake_to_mongo(date):
     # Load raw
-    tweets_raw = spark.read.json("/home/bigdata/datalake/raw/twitter/20220501/*.json")
+    tweets_raw = spark.read.json(f"/home/bigdata/datalake/raw/twitter/{date}/*.json")
 
     # Extract Extract
     tweets = tweets_raw \
@@ -35,14 +35,19 @@ def datalake_to_mongo():
 
 
 def main():
-    datalake_to_mongo()
+    for i in range(2,20):
+        if i < 10:
+            i = f'0{i}'
+        date = f'202205{i}'
+        print(f"Handling {date}")
+        datalake_to_mongo(date)
     return
 
 
 if __name__ == '__main__':
     t1 = datetime.datetime.now()
     print('Started at :', t1)
-    datalake_to_mongo()
+    main()
     t2 = datetime.datetime.now()
     dist = t2 - t1
     print(f'Finished at: {t2} | elapsed time {dist.seconds}s')
