@@ -13,6 +13,9 @@ def datalake_to_mongo():
     tweets_raw = spark.read.json("/home/bigdata/datalake/raw/twitter/20220501/*.json")
 
     # Extract Extract
+    tweets_raw = tweets_raw \
+        .select(col('data'))\
+
     tweets_raw.show()
 
     return
