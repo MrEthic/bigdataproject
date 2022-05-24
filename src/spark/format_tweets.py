@@ -42,7 +42,7 @@ def main():
 if __name__ == '__main__':
     t1 = datetime.datetime.now()
     print('Started at :', t1)
-    main()
+    datalake_to_mongo()
     t2 = datetime.datetime.now()
     dist = t2 - t1
     print(f'Finished at: {t2} | elapsed time {dist.seconds}s')
