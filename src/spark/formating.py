@@ -21,8 +21,7 @@ def datalake_to_mongo():
         .drop(col('entities'))
 
     users.write\
-        .format("com.mongodb.spark.sql.DefaultSource")\
-        .mode("append")\
+        .format("mongodb")\
         .option("database","bigdataproject")\
         .option("collection", "twitter.user")\
         .save()
