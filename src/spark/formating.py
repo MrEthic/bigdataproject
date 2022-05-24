@@ -20,19 +20,21 @@ def datalake_to_mongo():
         .dropDuplicates(["_id"])\
         .drop(col('entities'))
 
+    # users.write\
+    #     .format("mongodb")\
+    #     .mode("append")\
+    #     .option("database","bigdataproject")\
+    #     .option("collection", "twitter.user")\
+    #     .save()
 
-    print(users.show())
+    users.show()
 
-    users.write\
-        .format("mongodb")\
-        .mode("append")\
-        .option("database","bigdataproject")\
-        .option("collection", "twitter.user")\
-        .save()
+    return
 
 
 def main():
     datalake_to_mongo()
+    return
 
 
 if __name__ == '__main__':
@@ -46,7 +48,7 @@ if __name__ == '__main__':
     spark.stop()
     sys.exit(0)
 
-
+sys.exit(0)
 #df = spark.read.format("mongodb").load()
 
 
