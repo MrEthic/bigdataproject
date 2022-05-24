@@ -46,7 +46,7 @@ if __name__ == '__main__':
     t2 = datetime.datetime.now()
     dist = t2 - t1
     print(f'Finished at: {t2} | elapsed time {dist.seconds}s')
-    #spark.sparkContext._gateway.close()
+    spark.sparkContext._gateway.close()
     spark.stop()
     sys.exit(0)
 
