@@ -31,6 +31,8 @@ def datalake_to_mongo():
 
     users.show()
 
+    del users
+
 
 def main():
     datalake_to_mongo()
