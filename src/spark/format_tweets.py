@@ -14,7 +14,7 @@ def datalake_to_mongo():
 
     # Extract Extract
     tweets_raw = tweets_raw \
-        .select(col('data'))\
+        .select(col('data.*'))\
 
     tweets_raw.show()
 
