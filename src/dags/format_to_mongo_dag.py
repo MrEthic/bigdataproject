@@ -30,7 +30,7 @@ with DAG('format_to_mongo_dag',
         executor_memory='5g',
         driver_memory='5g',
         name='datalake_to_mongo',
-        execution_timeout=timedelta(minutes=10),
+        execution_timeout=timedelta(minutes=1000000),
         conf={
             "spark.executorEnv.JAVA_HOME": "/usr/lib/jvm/java-11-openjdk-amd64",
             "spark.yarn.appMasterEnv.JAVA_HOME": "/usr/lib/jvm/java-11-openjdk-amd64",

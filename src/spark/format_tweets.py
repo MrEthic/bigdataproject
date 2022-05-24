@@ -16,10 +16,10 @@ def datalake_to_mongo(date):
     tweets = tweets_raw \
         .select(col('data.*')) \
         .drop(col('attachments')) \
-        .withColumn("created_at_date", to_date('created_at')) \
-        .withColumn("created_at_time", to_timestamp('created_at')) \
+        .withColumnRenamed("created_at", "created_at_") \
+        .withColumn("created_at", to_timestamp('created_at_')) \
         .withColumnRenamed("id", "_id") \
-        .drop(col('created_at')) \
+        .drop(col('created_at_')) \
         .drop(col('geo'))
 
     tweets.write \

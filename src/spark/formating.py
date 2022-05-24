@@ -16,11 +16,12 @@ def datalake_to_mongo():
     users = tweets_raw.select(col('includes.users'))\
         .select(explode("users"))\
         .select(col('col.*')) \
-        .withColumn("created_at_date",to_timestamp('created_at'))\
+        .withColumnRenamed("created_at", "created_at_") \
+        .withColumn("created_at",to_timestamp('created_at_'))\
         .withColumnRenamed("id","_id")\
         .dropDuplicates(["_id"])\
         .drop(col('entities'))\
-        .drop(col('created_at'))
+        .drop(col('created_at_'))
 
     users.write\
         .format("mongodb")\
@@ -31,12 +32,9 @@ def datalake_to_mongo():
 
     users.show()
 
-    return
-
 
 def main():
     datalake_to_mongo()
-    return
 
 
 if __name__ == '__main__':
@@ -46,9 +44,9 @@ if __name__ == '__main__':
     t2 = datetime.datetime.now()
     dist = t2 - t1
     print(f'Finished at: {t2} | elapsed time {dist.seconds}s')
-    spark.sparkContext._gateway.close()
+    #spark.sparkContext._gateway.close()
     spark.stop()
-    sys.exit(0)
+    exit(0)
 
 #df = spark.read.format("mongodb").load()
 
