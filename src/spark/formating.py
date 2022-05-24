@@ -20,12 +20,12 @@ def datalake_to_mongo():
         .dropDuplicates(["_id"])\
         .drop(col('entities'))
 
-    # users.write\
-    #     .format("mongodb")\
-    #     .mode("append")\
-    #     .option("database","bigdataproject")\
-    #     .option("collection", "twitter.user")\
-    #     .save()
+    users.write\
+        .format("com.mongodb.spark.sql.DefaultSource")\
+        .mode("append")\
+        .option("database","bigdataproject")\
+        .option("collection", "twitter.user")\
+        .save()
 
     users.show()
 
@@ -44,11 +44,10 @@ if __name__ == '__main__':
     t2 = datetime.datetime.now()
     dist = t2 - t1
     print(f'Finished at: {t2} | elapsed time {dist.seconds}s')
-    spark.sparkContext._gateway.close()
-    spark.stop()
+    #spark.sparkContext._gateway.close()
+    #spark.stop()
     sys.exit(0)
 
-sys.exit(0)
 #df = spark.read.format("mongodb").load()
 
 
