@@ -1,6 +1,6 @@
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, explode, to_date
+from pyspark.sql.functions import col, explode, to_date, to_timestamp
 import datetime
 import sys
 
@@ -13,10 +13,23 @@ def datalake_to_mongo():
     tweets_raw = spark.read.json("/home/bigdata/datalake/raw/twitter/20220501/*.json")
 
     # Extract Extract
-    tweets_raw = tweets_raw \
-        .select(col('data.*'))\
+    tweets = tweets_raw \
+        .select(col('data.*')) \
+        .drop(col('attachments')) \
+        .withColumn("created_at_date", to_date('created_at')) \
+        .withColumn("created_at_time", to_timestamp('created_at')) \
+        .withColumnRenamed("id", "_id") \
+        .drop(col('created_at')) \
+        .drop(col('geo'))
 
-    tweets_raw.show()
+    tweets.write \
+        .format("mongodb") \
+        .mode("append") \
+        .option("database", "bigdataproject") \
+        .option("collection", "twitter.tweet") \
+        .save()
+
+    tweets.show()
 
     return
 
