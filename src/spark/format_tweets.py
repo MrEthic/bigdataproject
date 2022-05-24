@@ -47,7 +47,7 @@ if __name__ == '__main__':
     dist = t2 - t1
     print(f'Finished at: {t2} | elapsed time {dist.seconds}s')
     #spark.sparkContext._gateway.close()
-    #spark.stop()
+    spark.stop()
     sys.exit(0)
 
 #df = spark.read.format("mongodb").load()
