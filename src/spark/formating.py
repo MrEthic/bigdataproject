@@ -22,6 +22,7 @@ def datalake_to_mongo():
 
     users.write\
         .format("mongodb")\
+        .mode("overwrite")\
         .option("database","bigdataproject")\
         .option("collection", "twitter.user")\
         .save()
