@@ -31,17 +31,16 @@ def datalake_to_mongo(date):
 
     tweets.show()
 
-    return
-
 
 def main():
-    for i in range(6,12):
-        if i < 10:
-            i = f'0{i}'
-        date = f'202206{i}'
-        print(f"Handling {date}")
-        datalake_to_mongo(date)
-    return
+    # for i in range(6,12):
+    #     if i < 10:
+    #         i = f'0{i}'
+    #     date = f'202206{i}'
+    #     print(f"Handling {date}")
+    #     datalake_to_mongo(date)
+    # return
+    datalake_to_mongo('20220606')
 
 
 if __name__ == '__main__':
