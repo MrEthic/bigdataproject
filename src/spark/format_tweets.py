@@ -12,12 +12,11 @@ def datalake_to_mongo(date):
     # Load raw
     tweets_raw = spark.read.json(f"/home/bigdata/datalake/raw/twitter/{date}/*.json")
 
-    # Extract Extract
+    # Extract Extract .withColumn("created_at", to_timestamp('created_at_')) \
     tweets = tweets_raw \
         .select(col('data.*')) \
         .drop(col('attachments')) \
         .withColumnRenamed("created_at", "created_at_") \
-        .withColumn("created_at", to_timestamp('created_at_')) \
         .withColumnRenamed("id", "_id") \
         .drop(col('created_at_')) \
         .drop(col('geo'))
