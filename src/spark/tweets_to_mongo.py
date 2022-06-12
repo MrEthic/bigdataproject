@@ -46,6 +46,8 @@ def datalake_to_mongo(date):
 def main():
     days = os.listdir("/home/bigdata/datalake/raw/twitter/")
     for day in days:
+        if day in ('20220512', '20220502', '20220519', '20220507', '20220528', '20220510', '20220514', '20220517', '20220516', '20220521',
+                   '20220505', '20220511', '20220520', '20220506', '20220504', '20220529', '20220527', '20220508'): continue
         print(f"Processing {day}")
         datalake_to_mongo(day)
         print(f"Finished {day}")
