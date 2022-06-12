@@ -35,13 +35,6 @@ def datalake_to_mongo(date):
 
 
 def main():
-    for i in range(10,32):
-        if i < 10:
-            i = f'0{i}'
-        date = f'202205{i}'
-        print(f"Handling {date}")
-        datalake_to_mongo(date)
-
     for i in range(0,12):
         if i < 10:
             i = f'0{i}'
