@@ -10,7 +10,7 @@ from src.spark import datalake_to_mongo
 
 default_args = {
     'owner': 'admin',
-    'start_date': datetime(2022, 11, 6),
+    'start_date': datetime(2022, 1, 1),
     'retries': 2,
 	  'retry_delay': timedelta(hours=1)
 }
