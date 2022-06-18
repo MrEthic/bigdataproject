@@ -47,5 +47,3 @@ def users_to_mongo():
         .option("database","bigdataproject")\
         .option("collection", "twitter.user")\
         .save()
-
-users_to_mongo()
