@@ -24,7 +24,7 @@ def tweets_to_mongo():
     today = datetime.date.today()
     today_folder = today.strftime("%Y%m%d")
 
-    path_to_files = os.sep.join(['home', 'bigdata', 'datalake', 'raw', 'twitter', today_folder])
+    path_to_files = os.sep.join([os.sep, 'home', 'bigdata', 'datalake', 'raw', 'twitter', today_folder])
     if not os.path.exists(path_to_files):
         raise ValueError(f"{path_to_files} doesn't exists")
 
