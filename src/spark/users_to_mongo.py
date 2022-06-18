@@ -5,14 +5,14 @@ import os
 
 
 def users_to_mongo():
-    spark = SparkSession.builder.appName('TEST') \
+    spark = SparkSession.builder.appName('Twitter ETL users') \
         .master('local[*]') \
         .config("spark.executorEnv.JAVA_HOME", "/usr/lib/jvm/java-11-openjdk-amd64") \
         .config("spark.yarn.appMasterEnv.JAVA_HOME", "/usr/lib/jvm/java-11-openjdk-amd64") \
         .config("spark.mongodb.connection.uri",
                 "mongodb+srv://remote_worker:remote_worker@bddbd.ptwl0.mongodb.net/bigdataproject") \
         .config("spark.mongodb.database", "bigdataproject") \
-        .config("spark.mongodb.collection", "twitter.tweet") \
+        .config("spark.mongodb.collection", "twitter.user") \
         .config("spark.mongodb.input.uri",
                 "mongodb+srv://remote_worker:remote_worker@bddbd.ptwl0.mongodb.net/bigdataproject") \
         .config("spark.mongodb.output.uri",
@@ -47,3 +47,5 @@ def users_to_mongo():
         .option("database","bigdataproject")\
         .option("collection", "twitter.user")\
         .save()
+
+users_to_mongo()

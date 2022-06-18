@@ -6,7 +6,7 @@ import os
 
 
 def tweets_to_mongo():
-    spark = SparkSession.builder.appName('TEST') \
+    spark = SparkSession.builder.appName('Twitter ETL tweets') \
         .master('local[*]') \
         .config("spark.executorEnv.JAVA_HOME", "/usr/lib/jvm/java-11-openjdk-amd64") \
         .config("spark.yarn.appMasterEnv.JAVA_HOME", "/usr/lib/jvm/java-11-openjdk-amd64") \

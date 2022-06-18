@@ -21,7 +21,7 @@ with airflow.DAG('yesterday_tweets_to_mongo', default_args=default_args, schedul
     )
 
     users_to_mongo_dag = PythonOperator(
-        task_id='users_tweets_to_mongo',
+        task_id='etl_users_to_mongo',
         python_callable=tweets_to_mongo
     )
 
