@@ -11,7 +11,7 @@ from src.spark import datalake_to_mongo
 default_args = {
     'owner': 'admin',
     'start_date': datetime(2022, 1, 1),
-    'retries': 2,
+    'retries': 0,
 	  'retry_delay': timedelta(hours=1)
 }
 with airflow.DAG('yesterday_tweets_to_mongo',
