@@ -40,7 +40,7 @@ def subject_agg():
         .withColumnRenamed("word", "_id")\
         .sort('count', ascending=False)
 
-    count = count.filter(count.word.rlike("^#|^@|\\p{Punct}") == False)
+    count = count.filter(count._id.rlike("^#|^@|\\p{Punct}") == False)
 
     count.write \
         .format("mongodb") \
