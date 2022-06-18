@@ -25,12 +25,12 @@ def tweets_to_mongo():
     today_folder = today.strftime("%Y%m%d")
 
     path_to_files = os.sep.join(['home', 'bigdata', 'datalake', 'raw', 'twitter', today_folder])
-    if not os.path.exists(path_to_files):
+    if not os.path.exists('/' + path_to_files):
         raise ValueError(f"{path_to_files} doesn't exists")
 
 
     # Load raw
-    tweets_raw = spark.read.json(path_to_files)
+    tweets_raw = spark.read.json('/' + path_to_files)
 
     # Extract Extract .withColumn("created_at", to_timestamp('created_at_')) \
     tweets = tweets_raw \

@@ -28,7 +28,7 @@ def users_to_mongo():
         raise ValueError(f"{path_to_files} doesn't exists")
 
     # Load raw
-    tweets_raw = spark.read.json(path_to_files)
+    tweets_raw = spark.read.json('/' + path_to_files)
 
     # Extract Extract
     users = tweets_raw.select(col('includes.users'))\
