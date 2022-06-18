@@ -5,7 +5,7 @@ from airflow.operators.python_operator import PythonOperator
 import sys
 sys.path.insert(0, '/home/bigdata/tweet_election_project/')
 
-from src.spark import datalake_to_mongo
+from src.spark import tweets_to_mongo, users_to_mongo
 
 
 default_args = {
@@ -14,9 +14,15 @@ default_args = {
     'retries': 0,
 	  'retry_delay': timedelta(hours=1)
 }
-with airflow.DAG('yesterday_tweets_to_mongo',
-                  default_args=default_args, schedule_interval='0 1 * * *', catchup=False) as dag:
-    yesterday_tweets_to_mongo = PythonOperator(
+with airflow.DAG('yesterday_tweets_to_mongo', default_args=default_args, schedule_interval='0 1 * * *', catchup=False) as dag:
+    tweets_to_mongo_dag = PythonOperator(
         task_id='elt_tweets_to_mongo',
-        python_callable=datalake_to_mongo
+        python_callable=tweets_to_mongo
     )
+
+    users_to_mongo_dag = PythonOperator(
+        task_id='users_tweets_to_mongo',
+        python_callable=tweets_to_mongo
+    )
+
+    tweets_to_mongo_dag>>users_to_mongo_dag
