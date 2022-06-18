@@ -6,6 +6,7 @@ import sys
 
 def test():
     print(sys.path)
+    raise ValueError("Hello")
 
 default_args = {
     'owner': 'admin',
