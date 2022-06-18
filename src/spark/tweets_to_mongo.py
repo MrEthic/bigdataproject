@@ -48,3 +48,5 @@ def tweets_to_mongo():
         .option("database", "bigdataproject") \
         .option("collection", "twitter.tweet") \
         .save()
+
+tweets_to_mongo()
