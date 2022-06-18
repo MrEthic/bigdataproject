@@ -1,8 +1,11 @@
 import airflow
 from datetime import datetime, timedelta
 from airflow.operators.python_operator import PythonOperator
-from src.spark import datalake_to_mongo
+#from src.spark import datalake_to_mongo
+import sys
 
+def test():
+    print(sys.path)
 
 default_args = {
     'owner': 'admin',
@@ -14,5 +17,5 @@ with airflow.DAG('yesterday_tweets_to_mongo',
                   default_args=default_args) as dag:
     yesterday_tweets_to_mongo = PythonOperator(
         task_id='elt_tweets_to_mongo',
-        python_callable=datalake_to_mongo
+        python_callable=test
     )
