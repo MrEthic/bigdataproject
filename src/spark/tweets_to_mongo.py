@@ -5,7 +5,7 @@ import os
 
 
 
-def datalake_to_mongo(date):
+def datalake_to_mongo():
     spark = SparkSession.builder.appName('TEST') \
         .master('local[*]') \
         .config("spark.executorEnv.JAVA_HOME", "/usr/lib/jvm/java-11-openjdk-amd64") \
