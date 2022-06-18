@@ -48,10 +48,10 @@ def users_to_mongo(date):
 
 
 if __name__ == '__main__':
-    for i in range(1, 30):
+    for i in range(1, 19):
         if i < 10:
             i = f'0{i}'
-        date = f'202205{i}'
+        date = f'202206{i}'
         print(f'Go for {date}')
         users_to_mongo(date)
         print(f'End of {date}')
