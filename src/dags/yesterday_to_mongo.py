@@ -30,4 +30,4 @@ with airflow.DAG('yesterday_tweets_to_mongo', default_args=default_args, schedul
         python_callable=subject_agg
     )
 
-    tweets_to_mongo_dag>>[users_to_mongo, subject_agg]
+    tweets_to_mongo_dag>>[users_to_mongo, agg_to_mongo_dag]
