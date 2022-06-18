@@ -15,7 +15,7 @@ default_args = {
 	  'retry_delay': timedelta(hours=1)
 }
 with airflow.DAG('yesterday_tweets_to_mongo',
-                  default_args=default_args, schedule_interval='0 1 * * *') as dag:
+                  default_args=default_args, schedule_interval='0 1 * * *', catchup=False) as dag:
     yesterday_tweets_to_mongo = PythonOperator(
         task_id='elt_tweets_to_mongo',
         python_callable=datalake_to_mongo
