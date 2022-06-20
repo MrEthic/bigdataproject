@@ -17,11 +17,13 @@ default_args = {
 with airflow.DAG('yesterday_tweets_to_mongo', default_args=default_args, schedule_interval='0 1 * * *', catchup=False) as dag:
     tweets_to_mongo_dag = PythonOperator(
         task_id='elt_tweets_to_mongo',
+        op_kwargs={"folder": None},
         python_callable=tweets_to_mongo
     )
 
     users_to_mongo_dag = PythonOperator(
         task_id='etl_users_to_mongo',
+        op_kwargs={"folder": None},
         python_callable=users_to_mongo
     )
 

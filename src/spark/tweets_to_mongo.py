@@ -5,7 +5,7 @@ import os
 
 
 
-def tweets_to_mongo():
+def tweets_to_mongo(**kwargs):
     spark = SparkSession.builder.appName('Twitter ETL tweets') \
         .master('local[*]') \
         .config("spark.executorEnv.JAVA_HOME", "/usr/lib/jvm/java-11-openjdk-amd64") \
@@ -23,6 +23,9 @@ def tweets_to_mongo():
 
     today = datetime.date.today()
     today_folder = today.strftime("%Y%m%d")
+
+    if kwargs['folder'] is not None:
+        today_folder = kwargs['folder']
 
     path_to_files = os.sep.join(['home', 'bigdata', 'datalake', 'raw', 'twitter', today_folder])
     if not os.path.exists('/' + path_to_files):
