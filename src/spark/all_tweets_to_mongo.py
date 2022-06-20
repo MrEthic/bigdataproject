@@ -23,6 +23,7 @@ def tweets_to_mongo(date):
 
     path_to_files = os.sep.join(['home', 'bigdata', 'datalake', 'raw', 'twitter', date])
     if not os.path.exists('/' + path_to_files):
+        return
         raise ValueError(f"{path_to_files} doesn't exists")
 
 
@@ -48,7 +49,7 @@ def tweets_to_mongo(date):
 
 
 if __name__ == '__main__':
-    for i in range(6, 31):
+    for i in range(22, 32):
         if i < 10:
             i = f'0{i}'
         date = f'202205{i}'
