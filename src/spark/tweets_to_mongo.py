@@ -24,8 +24,8 @@ def tweets_to_mongo(**kwargs):
     today = datetime.date.today()
     today_folder = today.strftime("%Y%m%d")
 
-    if kwargs['folder'] is not None:
-        today_folder = kwargs['folder']
+    if kwargs['dag_run'].conf['folder'] is not None:
+        today_folder = kwargs['dag_run'].conf['folder']
 
     path_to_files = os.sep.join(['home', 'bigdata', 'datalake', 'raw', 'twitter', today_folder])
     if not os.path.exists('/' + path_to_files):
