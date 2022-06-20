@@ -18,7 +18,7 @@ def tweets_to_mongo():
                 "mongodb+srv://remote_worker:remote_worker@bddbd.ptwl0.mongodb.net/bigdataproject") \
         .config("spark.mongodb.output.uri",
                 "mongodb+srv://remote_worker:remote_worker@bddbd.ptwl0.mongodb.net/bigdataproject") \
-        .config('spark.jars.packages', 'org.mongodb.spark:mongo-spark-connector:10.0.0') \
+        .config('spark.jars.packages', 'org.mongodb.spark:mongo-spark-connector:10.0.2') \
         .getOrCreate()
 
     today = datetime.date.today()
