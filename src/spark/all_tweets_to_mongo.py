@@ -55,3 +55,11 @@ if __name__ == '__main__':
         print(f'Go for {date}')
         tweets_to_mongo(date)
         print(f'End of {date}')
+
+    for i in range(1, 21):
+        if i < 10:
+            i = f'0{i}'
+        date = f'202206{i}'
+        print(f'Go for {date}')
+        tweets_to_mongo(date)
+        print(f'End of {date}')
