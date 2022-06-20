@@ -23,7 +23,6 @@ def tweets_to_mongo():
 
     today = datetime.date.today()
     today_folder = today.strftime("%Y%m%d")
-    today_folder = '20220618'
 
     path_to_files = os.sep.join(['home', 'bigdata', 'datalake', 'raw', 'twitter', today_folder])
     if not os.path.exists('/' + path_to_files):
