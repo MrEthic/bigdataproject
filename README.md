@@ -18,7 +18,4 @@ We've decided to use the following stack :
 
 ## Solution Architecture
 
-```mermaid
-  graph LR
-    Tweet Producer --> Kafka Broker (Topic: twitter.election.raw): Post Tweets as events
-```
+![Solution](solution.png)
