@@ -1,5 +1,5 @@
 # Big Data Project
-
+![Medium](https://medium.com/@jeremiebasso/big-data-project-4th-year-d5abc26fadc3)
 ## Introduction
 
 We decided here to study the tweets about the french parliements election of 2022. Our goal is to
