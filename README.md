@@ -18,4 +18,4 @@ We've decided to use the following stack :
 
 ## Solution Architecture
 
-![Solution](solution.png)
+![Solution](/solution.png)
